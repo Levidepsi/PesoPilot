@@ -1,0 +1,16 @@
+What still needs development
+- Live subscription payments through PayMongo
+- Automated GCash/Maya payment integration
+- Email verification and password recovery
+- Production security hardening and testing
+
+Implemented email verification and password recovery with Resend, keeping your existing authentication.
+- Added verification, resend, and password-reset pages.
+- Added expiring, single-use tokens and session invalidation after resets.
+- Updated the database.
+- Production build, TypeScript checks, and authentication tests passed.
+To enable emails, add these to pesopilot-local/.env:
+
+APP_URL="http://localhost:3000"
+RESEND_API_KEY="your-resend-api-key"
+EMAIL_FROM="PesoPilot <noreply@your-verified-domain.com>"

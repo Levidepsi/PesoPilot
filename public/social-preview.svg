@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#173e31"/>
+  <circle cx="1120" cy="70" r="270" fill="#214b39"/>
+  <circle cx="1120" cy="70" r="195" fill="none" stroke="#41634c" stroke-width="2"/>
+  <text x="80" y="126" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#f1f5e8">Peso<tspan fill="#f2a172">Pilot.</tspan></text>
+  <text x="80" y="276" font-family="Arial, sans-serif" font-size="66" font-weight="700" fill="#fff">A clearer picture</text>
+  <text x="80" y="356" font-family="Arial, sans-serif" font-size="66" font-weight="700" fill="#fff">of your money.</text>
+  <text x="80" y="426" font-family="Arial, sans-serif" font-size="27" fill="#c3d5ca">Simple finance tools for your everyday business.</text>
+  <rect x="80" y="494" width="230" height="54" rx="27" fill="#e7f0dc"/>
+  <text x="108" y="529" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#173e31">Start with Free</text>
+  <text x="343" y="529" font-family="Arial, sans-serif" font-size="22" fill="#c3d5ca">Made for the Philippines</text>
+</svg>
