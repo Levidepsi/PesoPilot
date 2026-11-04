@@ -7,7 +7,7 @@ A Next.js / Prisma / PostgreSQL starter application for Philippine small busines
 - Email/password registration and signed HTTP-only cookie sessions
 - Multiple businesses per user and OWNER / ADMIN / STAFF / VIEWER roles
 - Business-specific finance dashboard and six-month charts
-- Income/expense transactions, customers, utang, partial debt payments
+- Income/expense transactions, customers, Debt, partial debt payments
 - Inventory, low-stock indicators, stock adjustments
 - Single-product sales with automatic inventory deduction and cash transaction
 - CSV reports, business settings, team invitations by existing email
@@ -40,7 +40,7 @@ Set DATABASE_URL and SESSION_SECRET in Vercel, run `npx prisma db push` against 
 
 ## Notes and limitations
 
-This is a **development MVP**, not an audited production financial platform. The included sessions are self-contained signed cookies; add MFA, login throttling, CSRF threat review, error handling, full audit coverage, and security testing before exposing publicly. Payment integrations, paid billing, BIR-certified invoicing, bank syncing, receipt upload, recurring reminders and true double-entry accounting require external accounts and additional development. Sales currently support one product per checkout. Stock edits use basic checks; strengthen concurrent inventory adjustment logic before production. The utang module uses transaction-bound writes, but concurrent debt payment race prevention and idempotency are not yet implemented. This is a cash-flow tracker, not an official profit-and-loss or BIR tax system.
+This is a **development MVP**, not an audited production financial platform. The included sessions are self-contained signed cookies; add MFA, login throttling, CSRF threat review, error handling, full audit coverage, and security testing before exposing publicly. Payment integrations, paid billing, BIR-certified invoicing, bank syncing, receipt upload, recurring reminders and true double-entry accounting require external accounts and additional development. Sales currently support one product per checkout. Stock edits use basic checks; strengthen concurrent inventory adjustment logic before production. The Debt module uses transaction-bound writes, but concurrent debt payment race prevention and idempotency are not yet implemented. This is a cash-flow tracker, not an official profit-and-loss or BIR tax system.
 
 The app uses integer **centavos** (Prisma Int) and therefore has a maximum per-record value; use BigInt for very large balances.
 
@@ -72,9 +72,9 @@ Temporary local bypass: set `EMAIL_AUTH_ENABLED="false"` in `.env` and restart t
 
 ## Plans (payments not connected)
 
-Settings includes monthly/yearly pricing: Free, Starter (PHP 149/month or PHP 1,428/year), and Business (PHP 399/month or PHP 3,828/year). Paid plan buttons open a prefilled WhatsApp inquiry to the public contact configured in `lib/manual-subscriptions.ts`. Monthly/yearly amounts follow the selected interval. No automatic payment collection or activation occurs. Verify the payment in your merchant account before manually updating the correct Subscription row: plan STARTER/BUSINESS, status ACTIVE, provider MANUAL, providerReference for the verified payment, and currentPeriodEnd for its expiry. Renewals are manual. Refund terms are confirmed in chat before payment.
+Settings includes monthly/yearly pricing: Free, Starter (PHP 149/month or PHP 1,428/year), and Business (PHP 399/month or PHP 3,828/year). Paid plan buttons open a prefilled WhatsApp inquiry to the public contact configured in `lib/manual-subscriptions.ts`. Monthly/yearly amounts follow the selected interval. No automatic payment collection or activation occurs. Verify the payment in your merchant account before manually updating the correct Subscription row: plan STARTER/BUSINESS, status ACTIVE, provider MANUAL, providerReference for the verified payment, and currentPeriodEnd for its expiry. Renewals are manual. The refund policy is displayed beside plans on the homepage, pricing, and Settings: full refunds requested within 7 days of first activation (monthly or yearly), renewals reviewed individually, and refunds for verified duplicate payments or subscriptions we cannot provide. Customers request refunds through WhatsApp with their account email and payment reference. Refunds are processed manually; applicable consumer rights remain unaffected.
 
-Free allows one owned business, 100 transactions per Philippine calendar month, and 20 customers per business. Income entries, expense entries, product sales, and utang repayments each create one counted transaction; unpaid debt records do not. Quotas use the record creation timestamp, not a user-selected transaction date. All saved transaction history remains accessible. Reaching a limit blocks new entries, not reading existing records.
+Free allows one owned business, 100 transactions per Philippine calendar month, and 20 customers per business. Income entries, expense entries, product sales, and Debt repayments each create one counted transaction; unpaid debt records do not. Quotas use the record creation timestamp, not a user-selected transaction date. All saved transaction history remains accessible. Reaching a limit blocks new entries, not reading existing records.
 
 Starter enables inventory/sales entry, cash-flow reports, CSV exports, and unlimited transaction/customer entries for one owned business. Business includes up to three owned businesses and five distinct staff users across them, excluding the owner. Low-stock indicators are included in Starter. PDF reports, advanced analytics, and priority support are not advertised as available.
 

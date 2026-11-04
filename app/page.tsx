@@ -161,10 +161,10 @@ export default function Home() {
               </span>
               <h3>Keep customer credit clear.</h3>
               <p>
-                Track utang, due dates and partial repayments. See what is still
+                Track Debt, due dates and partial repayments. See what is still
                 outstanding without losing the history.
               </p>
-              <span className="benefit-label">Utang tracking</span>
+              <span className="benefit-label">Debt tracking</span>
             </article>
             <article>
               <span className="benefit-icon">

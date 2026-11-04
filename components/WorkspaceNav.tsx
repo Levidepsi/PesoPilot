@@ -19,7 +19,7 @@ const items = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/transactions", label: "Transactions", icon: ArrowLeftRight },
   { href: "/customers", label: "Customers", icon: Users },
-  { href: "/debts", label: "Utang tracker", icon: HandCoins },
+  { href: "/debts", label: "Debt tracker", icon: HandCoins },
   { href: "/inventory", label: "Inventory", icon: Package },
   { href: "/sales", label: "Sales", icon: ShoppingCart },
   { href: "/reports", label: "Reports", icon: ChartNoAxesCombined },

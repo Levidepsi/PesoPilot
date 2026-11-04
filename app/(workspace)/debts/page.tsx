@@ -5,7 +5,7 @@ import { addDebt, payDebt } from "@/lib/actions";
 import { pesos, dateLabel } from "@/lib/money";
 export const dynamic = "force-dynamic";
 export const metadata = pageMetadata(
-  "Utang tracker",
+  "Debt tracker",
   "Track customer credit, repayments and outstanding balances.",
 );
 

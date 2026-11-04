@@ -35,15 +35,22 @@ export default function Pricing() {
         <h3>How do I subscribe to a paid plan?</h3>
         <p>
           Choose Starter or Business and message us on WhatsApp. We confirm
-          payment instructions and refund terms before you pay, then activate
-          your subscription after verifying payment. Online checkout is not yet
-          available.
+          payment instructions before you pay, then activate your subscription
+          after verifying payment. Online checkout is not yet available.
         </p>
         <h3>What happens when I reach a Free limit?</h3>
         <p>
           Your saved records remain available. New transaction entries pause at
           100 per month and reopen next month. You can keep up to 20 customers
           on Free.
+        </p>
+        <h3>Can I request a refund?</h3>
+        <p>
+          Your first monthly or yearly subscription is eligible for a full
+          refund when requested within 7 days of activation. Renewal requests
+          are reviewed individually. Read our{" "}
+          <a href="#refund-policy">refund policy</a> for details and how to
+          request a refund.
         </p>
         <h3>How does yearly billing work?</h3>
         <p>

@@ -17,3 +17,11 @@ EMAIL_FROM="PesoPilot <noreply@your-verified-domain.com>"
 
 
 2026-12-04 00:00:00
+
+| Field | Example value |
+|---|---|
+| `plan` | `STARTER` or `BUSINESS` |
+| `status` | `ACTIVE` |
+| `currentPeriodEnd` | The date/time their access should expire |
+| `provider` | `MANUAL` for a manually verified payment |
+| `providerReference` | Your payment reference, if available |

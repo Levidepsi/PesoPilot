@@ -11,7 +11,7 @@ export const plans = {
       "1 business · owner only",
       "100 transactions per month",
       "Up to 20 customers",
-      "Income, expense and utang tracking",
+      "Income, expense and Debt tracking",
       "Basic dashboard",
       "Full saved transaction history",
     ],
@@ -26,7 +26,7 @@ export const plans = {
     customers: Infinity,
     features: [
       "1 business · owner only",
-      "Unlimited transactions, customers and utang records",
+      "Unlimited transactions, customers and Debt records",
       "Inventory and sales tracking",
       "Low-stock indicators",
       "Monthly cash-flow reports",

@@ -98,7 +98,8 @@ export default function PlanCards({ current }: { current?: Plan }) {
         <ol>
           <li>Create a Free account, then choose your plan above.</li>
           <li>
-            Confirm payment instructions and refund terms with us before paying.
+            Read the <a href="#refund-policy">refund policy below</a> and
+            confirm payment instructions with us before paying.
           </li>
           <li>
             Share your payment reference in chat. Once verified, we activate
@@ -116,6 +117,44 @@ export default function PlanCards({ current }: { current?: Plan }) {
           Renewals are manual; you will not be charged automatically.
         </p>
       </aside>
+      <sectionDebt
+        id="refund-policy"Debt
+        className="panel"
+        aria-labelledby="refund-policy-title"
+      >
+        <h3 id="refund-policy-title">Refund policy</h3>
+        <ul>
+          <li>
+            <strong>First subscription:</strong> Request a full refund within 7
+            days of activation. This applies to both monthly and yearly plans.
+          </li>
+          <li>
+            <strong>Renewals:</strong> Refund requests are reviewed
+            individually.
+          </li>
+          <li>
+            <strong>Duplicate payments or unavailable service:</strong> Verified
+            duplicate payments and payments for subscriptions we cannot provide
+            will be refunded.
+          </li>
+        </ul>
+        <p>
+          To request a refund, message us on{" "}
+          <a
+            href="https://wa.me/639284141394?text=Hi%21%20I%20would%20like%20to%20request%20a%20PesoPilot%20refund."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp at {subscriptionWhatsApp} (opens in a new tab)
+          </a>{" "}
+          with your account email and payment reference. We will confirm the
+          outcome and, if approved, the refund method and expected processing
+          time in chat.
+        </p>
+        <p className="hint">
+          This policy does not limit your rights under applicable consumer law.
+        </p>
+      </section>
       <p className="hint">
         Each income entry, expense entry, recorded sale, or utang repayment
         counts as one transaction. Creating an unpaid utang record does not

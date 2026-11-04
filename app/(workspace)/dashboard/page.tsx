@@ -14,6 +14,9 @@ import { StatCard } from "@/components/StatCard";
 import { CashChart, BarSummary } from "@/components/Charts";
 import { summary } from "@/lib/summary";
 import { pesos, dateLabel } from "@/lib/money";
+import { db } from "@/lib/db";
+import { businessPlan } from "@/lib/plan-access";
+import { monthWindow } from "@/lib/plans";
 export const dynamic = "force-dynamic";
 export const metadata = pageMetadata(
   "Overview",
@@ -22,6 +25,13 @@ export const metadata = pageMetadata(
 
 export default async function Dashboard() {
   const s = await summary();
+  const [access, transactionCount, customerCount] = await Promise.all([
+    businessPlan(db, s.b.id),
+    db.transaction.count({
+      where: { businessId: s.b.id, createdAt: monthWindow() },
+    }),
+    db.customer.count({ where: { businessId: s.b.id } }),
+  ]);
   const overdue = s.debtList.filter(
     (d) => d.remaining > 0 && d.dueDate && d.dueDate.getTime() < Date.now(),
   );
@@ -46,6 +56,35 @@ export default async function Dashboard() {
         </span>
         <span>All-time totals · Philippine peso</span>
       </div>
+      <section className="panel" aria-labelledby="dashboard-usage-title">
+        <div className="panelhead">
+          <h2 id="dashboard-usage-title">{access.limits.name} plan usage</h2>
+          <Link href="/settings#plans" className="subtlelink">
+            View plans
+          </Link>
+        </div>
+        <p>
+          <strong>
+            {transactionCount} /{" "}
+            {Number.isFinite(access.limits.transactions)
+              ? access.limits.transactions
+              : "Unlimited"}
+          </strong>{" "}
+          transactions this month
+          {" · "}
+          <strong>
+            {customerCount} /{" "}
+            {Number.isFinite(access.limits.customers)
+              ? access.limits.customers
+              : "Unlimited"}
+          </strong>{" "}
+          customers
+        </p>
+        <p className="hint">
+          Usage for {s.b.name}. Transaction counts reset on the first of each
+          month in Philippine time. Customer counts do not reset monthly.
+        </p>
+      </section>
       {s.transactions.length === 0 && (
         <section className="welcome-banner">
           <div>
@@ -143,7 +182,7 @@ export default async function Dashboard() {
         </div>
         <div className="stack">
           <section className="panel">
-            <div className="panelhead">
+            <div className="panelhead">Debt
               <div>
                 <h2>Outstanding Debts</h2>
                 <p>Customer balances to collect</p>
