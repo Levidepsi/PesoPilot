@@ -25,7 +25,11 @@ const items = [
   { href: "/reports", label: "Reports", icon: ChartNoAxesCombined },
   { href: "/settings", label: "Settings", icon: Settings2 },
 ];
-export default function WorkspaceNav() {
+export default function WorkspaceNav({
+  isAdmin = false,
+}: {
+  isAdmin?: boolean;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   return (
@@ -45,7 +49,18 @@ export default function WorkspaceNav() {
         aria-label="Workspace"
         className={open ? "nav-open" : ""}
       >
-        {items.map(({ href, label, icon: Icon }) => (
+        {[
+          ...items,
+          ...(isAdmin
+            ? [
+                {
+                  href: "/admin",
+                  label: "Subscriptions admin",
+                  icon: Settings2,
+                },
+              ]
+            : []),
+        ].map(({ href, label, icon: Icon }) => (
           <Link
             key={href}
             href={href}

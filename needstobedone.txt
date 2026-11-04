@@ -25,3 +25,18 @@ EMAIL_FROM="PesoPilot <noreply@your-verified-domain.com>"
 | `currentPeriodEnd` | The date/time their access should expire |
 | `provider` | `MANUAL` for a manually verified payment |
 | `providerReference` | Your payment reference, if available |
+
+
+admin-only page can let you manage subscriptions without opening Supabase.
+
+It could include:
+- Search accounts by email or business name.
+- View their current plan, status, and expiry.
+- Activate, renew, change, or cancel a subscription.
+- Record verified payments and payment references.
+- Keep a history of changes.
+We’d restrict access to your designated admin account and enforce permissions on the server—not just hide the page from customers.
+
+For your manual WhatsApp flow: verify payment → open admin page → select plan and expiry → activate.
+
+We can build this later.

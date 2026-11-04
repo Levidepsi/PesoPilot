@@ -176,6 +176,23 @@ model Subscription {
   currentPeriodEnd  DateTime?
 }
 
+// Separate from customer cash-flow records. Append-only through the admin action.
+model SubscriptionChange {
+  id String @id @default(cuid())
+  businessId String
+  actorId String
+  actorEmail String
+  operation String
+  reason String
+  before Json
+  after Json
+  paymentReference String? @unique
+  amountCentavos Int?
+  createdAt DateTime @default(now())
+
+  @@index([businessId, createdAt])
+}
+
 model AuditLog {
   id         String   @id @default(cuid())
   businessId String

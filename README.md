@@ -85,3 +85,13 @@ Plan quota writes acquire a database row lock on the owner within the same trans
 Metadata: set `APP_URL` to your public HTTPS origin when deploying (Vercel production domain is used as a fallback). Pricing is indexable and included in `/sitemap.xml`. Account and workspace pages default to noindex. The branded favicon, Apple touch icon, and social preview are bundled locally.
 
 Public pages: `/` introduces PesoPilot with features, benefits, pricing and signup links. `/pricing` shows the plan comparison. Login and registration lead to `/dashboard`. Workspace pages share an authenticated route-group layout; the homepage and pricing stay public even while signed in. Online payment checkout remains disabled; paid subscriptions can be arranged manually through WhatsApp.
+
+## Subscription administration
+
+`/admin` is restricted on the server to the existing account identified by `SITE_ADMIN_USER_ID`. Business OWNER/ADMIN roles do not grant site-admin access. An empty setting denies access to everyone. Set this server-only variable locally and in Vercel; never use a NEXT_PUBLIC variable. Restart or redeploy after changing it.
+
+Before deploying this feature to another database, run `npm run db:push` to create SubscriptionChange. Existing subscriptions are preserved. Search by owner email or business name, select Manage, and choose Activate, Renew, Change, or Cancel. Activation/renewal require confirmation of a verified merchant payment, a unique channel-prefixed reference, amount in PHP, and an explicit future expiry date (end of day in Philippine time). Change supports corrections without a new payment; a reason is always required. Renew extends the expiry; cancellation takes effect immediately and does not send money or issue refunds.
+
+Each save atomically records the previous/new subscription, acting admin, timestamp, reason, and any verified payment. Payment references cannot be reused. Stale forms are rejected. The history displays the latest 50 records; earlier records remain stored. Records are retained independently of business deletion. Admin entries are separate from the customer's cash-flow transactions. Owner-wide plan inheritance still applies: another active owned-business subscription may preserve paid access after cancelling one subscription.
+
+Validation: `npx tsx --test tests/admin-subscriptions.test.ts`.

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Store, LogOut } from "lucide-react";
 import WorkspaceNav from "@/components/WorkspaceNav";
+import { isSiteAdmin } from "@/lib/admin";
 import { requireUser } from "@/lib/auth";
 import { db, business } from "@/lib/db";
 import { logoutAction, switchBusiness } from "@/lib/account-actions";
@@ -27,7 +28,7 @@ export default async function WorkspaceLayout({
             <span>{b.name}</span>
           </div>
           <div className="navlabel">WORKSPACE</div>
-          <WorkspaceNav />
+          <WorkspaceNav isAdmin={isSiteAdmin(u)} />
           <form action={logoutAction} className="logoutform">
             <button className="btn">
               <LogOut size={16} /> Log out
