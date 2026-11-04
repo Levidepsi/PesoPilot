@@ -117,8 +117,8 @@ export default function PlanCards({ current }: { current?: Plan }) {
           Renewals are manual; you will not be charged automatically.
         </p>
       </aside>
-      <sectionDebt
-        id="refund-policy"Debt
+      <section
+        id="refund-policy"
         className="panel"
         aria-labelledby="refund-policy-title"
       >
