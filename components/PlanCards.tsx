@@ -12,9 +12,10 @@ export default function PlanCards({ current }: { current?: Plan }) {
     <section id="plans" className="plans-section" aria-labelledby="plans-title">
       <h2 id="plans-title">Plans for your business</h2>
       <p>
-        Start free, or contact us on WhatsApp to arrange a Starter or Business
-        subscription. Paid plans are activated manually after payment
-        verification.
+        Start free, or contact us to subscribe to Starter or Business.
+        Subscriptions are currently processed manually. Contact our official
+        WhatsApp to receive payment instructions. Your plan activates after
+        payment verification.
       </p>
       <div className="billing-toggle" aria-label="Billing interval">
         <button
@@ -70,11 +71,11 @@ export default function PlanCards({ current }: { current?: Plan }) {
                   href={subscriptionInquiry(key, yearly)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${current === key ? "Renew" : "Subscribe to"} ${plan.name} ${yearly ? "yearly" : "monthly"} via WhatsApp (opens in a new tab)`}
+                  aria-label={`Contact us to ${current === key ? "renew" : "subscribe to"} ${plan.name} ${yearly ? "yearly" : "monthly"} via WhatsApp (opens in a new tab)`}
                 >
                   {current === key
-                    ? "Renew via WhatsApp"
-                    : "Subscribe via WhatsApp"}
+                    ? "Contact us to renew"
+                    : "Contact us to subscribe"}
                 </a>
               ) : (
                 <button type="button" className="btn" disabled>
@@ -89,11 +90,17 @@ export default function PlanCards({ current }: { current?: Plan }) {
         className="panel manual-subscription"
         aria-labelledby="manual-subscription-title"
       >
-        <h3 id="manual-subscription-title">A little help getting started</h3>
+        <h3 id="manual-subscription-title">How manual subscriptions work</h3>
         <p>
           Message us on WhatsApp at <strong>{subscriptionWhatsApp}</strong>.
           Your chosen plan and billing period will be included in an editable
           message.
+        </p>
+        <p>
+          Chat is for subscription assistance and payment instructions. Make
+          your payment in your payment provider’s official app, after checking
+          the recipient name and exact amount. We will never ask for your
+          password, MPIN, or OTP.
         </p>
         <ol>
           <li>Create a Free account, then choose your plan above.</li>

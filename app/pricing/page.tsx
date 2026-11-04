@@ -34,7 +34,8 @@ export default function Pricing() {
         <p>Yes. Create a Free account with no payment details required.</p>
         <h3>How do I subscribe to a paid plan?</h3>
         <p>
-          Choose Starter or Business and message us on WhatsApp. We confirm
+          Choose Starter or Business and select “Contact us to subscribe” to
+          open our official WhatsApp. Subscriptions are processed manually. We confirm
           payment instructions before you pay, then activate your subscription
           after verifying payment. Online checkout is not yet available.
         </p>

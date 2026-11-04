@@ -18,7 +18,7 @@ function form(overrides: Record<string, string> = {}) {
   return fd;
 }
 test("paid activation requires verified payment and valid plan, amount, future expiry", () => {
-  for (const change of [
+  const invalidInputs: Record<string, string>[] = [
     { verified: "" },
     { plan: "FAKE" },
     { amount: "-1" },
@@ -26,7 +26,8 @@ test("paid activation requires verified payment and valid plan, amount, future e
     { expiry: "2000-01-01" },
     { reason: "" },
     { paymentReference: "" },
-  ])
+  ];
+  for (const change of invalidInputs)
     assert.throws(() => parseSubscriptionChange(form(change)));
   const parsed = parseSubscriptionChange(form());
   assert.equal(parsed.amountCentavos, 14950);
