@@ -9,7 +9,13 @@ function val(fd: FormData, k: string) {
   return String(fd.get(k) ?? "").trim();
 }
 function refresh() {
-  for (const p of ["/", "/transactions", "/customers", "/debts", "/reports"])
+  for (const p of [
+    "/dashboard",
+    "/transactions",
+    "/customers",
+    "/debts",
+    "/reports",
+  ])
     revalidatePath(p);
 }
 export async function addTransaction(fd: FormData) {
@@ -118,5 +124,5 @@ export async function renameBusiness(fd: FormData) {
   if (!name) throw new Error("Business name required");
   await db.business.update({ where: { id: b.id }, data: { name } });
   refresh();
-  redirect("/");
+  redirect("/dashboard");
 }

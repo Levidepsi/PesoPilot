@@ -1,6 +1,6 @@
+import PublicNav from "@/components/PublicNav";
 import { pageMetadata } from "@/lib/site-metadata";
 import type { Metadata } from "next";
-import Link from "next/link";
 import PlanCards from "@/components/PlanCards";
 
 export const metadata: Metadata = {
@@ -15,14 +15,7 @@ export const metadata: Metadata = {
 export default function Pricing() {
   return (
     <div className="public-pricing">
-      <nav className="pricing-nav" aria-label="Pricing navigation">
-        <Link className="logo" href="/pricing">
-          Peso<span>Pilot.</span>
-        </Link>
-        <Link href="/login" className="btn">
-          Log in / Sign up
-        </Link>
-      </nav>
+      <PublicNav />
       <header className="pricing-intro">
         <p className="hint">Built for small businesses in the Philippines</p>
         <h1>Clear pricing. Room to grow.</h1>

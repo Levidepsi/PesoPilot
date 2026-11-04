@@ -16,7 +16,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 const items = [
-  { href: "/", label: "Overview", icon: LayoutDashboard },
+  { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/transactions", label: "Transactions", icon: ArrowLeftRight },
   { href: "/customers", label: "Customers", icon: Users },
   { href: "/debts", label: "Utang tracker", icon: HandCoins },

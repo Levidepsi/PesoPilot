@@ -1,247 +1,274 @@
-import { pageMetadata } from "@/lib/site-metadata";
-import EmptyState from "@/components/EmptyState";
 import Link from "next/link";
 import {
-  Wallet,
+  ArrowRight,
   ArrowUpRight,
   ArrowDownRight,
+  Wallet,
   HandCoins,
-  Plus,
-  ArrowRight,
-  CalendarDays,
+  Users,
+  Check,
+  ChartNoAxesCombined,
+  Store,
 } from "lucide-react";
-import { StatCard } from "@/components/StatCard";
-import { CashChart, BarSummary } from "@/components/Charts";
-import { summary } from "@/lib/summary";
-import { pesos, dateLabel } from "@/lib/money";
-export const dynamic = "force-dynamic";
-export const metadata = pageMetadata(
-  "Overview",
-  "Your business income, expenses and customer balances at a glance.",
-);
+import PublicNav from "@/components/PublicNav";
+import PlanCards from "@/components/PlanCards";
+import { pageMetadata } from "@/lib/site-metadata";
 
-export default async function Dashboard() {
-  const s = await summary();
-  const overdue = s.debtList.filter(
-    (d) => d.remaining > 0 && d.dueDate && d.dueDate.getTime() < Date.now(),
-  );
+export const metadata = {
+  ...pageMetadata(
+    "Small business finance, made clearer",
+    "Keep track of your income, expenses and customer credit with PesoPilot. Start free and give your everyday business a clearer financial picture.",
+    "/",
+  ),
+  robots: { index: true, follow: true },
+};
+
+export default function Home() {
   return (
-    <>
-      <div className="pagehead">
-        <div>
-          <span className="eyebrow">YOUR BUSINESS, AT A GLANCE</span>
-          <h1>A clearer picture of your money.</h1>
-          <p>
-            A little clarity for every business day. Here is your latest
-            overview.
-          </p>
-        </div>
-        <Link className="btn primary" href="/transactions">
-          <Plus size={17} /> Add Transaction
-        </Link>
-      </div>
-      <div className="overview-strip">
-        <span>
-          <span className="live-dot" /> {s.b.name}
-        </span>
-        <span>All-time totals · Philippine peso</span>
-      </div>
-      {s.transactions.length === 0 && (
-        <section className="welcome-banner">
-          <div>
-            <span className="eyebrow">LET’S GET YOU STARTED</span>
-            <h2>Your next chapter starts with one entry.</h2>
+    <div className="landing">
+      <a href="#landing-content" className="skip-link">
+        Skip to content
+      </a>
+      <PublicNav />
+      <main id="landing-content">
+        <section className="landing-hero">
+          <div className="hero-copy">
+            <span className="eyebrow">
+              FOR YOUR STORE. YOUR SIDE HUSTLE. YOUR NEXT CHAPTER.
+            </span>
+            <h1>
+              Small business.
+              <br />
+              <span>Clearer numbers.</span>
+              <br />
+              Bigger possibilities.
+            </h1>
             <p>
-              Add your first income or expense to bring your dashboard to life.
+              Know what came in, what went out, and what customers still owe.
+              Give your everyday business a little more clarity with PesoPilot.
             </p>
-          </div>
-          <Link href="/transactions" className="btn primary">
-            <Plus size={17} /> Record your first transaction
-          </Link>
-        </section>
-      )}
-      <div className="quick-actions" aria-label="Quick actions">
-        <Link href="/transactions">
-          <Plus size={18} />
-          <span>Record income or expense</span>
-          <ArrowUpRight size={16} />
-        </Link>
-        <Link href="/customers">
-          <Plus size={18} />
-          <span>Add a customer</span>
-          <ArrowUpRight size={16} />
-        </Link>
-        <Link href="/debts">
-          <HandCoins size={18} />
-          <span>Manage customer credit</span>
-          <ArrowUpRight size={16} />
-        </Link>
-      </div>
-      <div className="stats">
-        <StatCard
-          label="Total Income"
-          value={pesos(s.income)}
-          detail="All recorded inflows"
-          color="orange"
-          icon={<ArrowUpRight />}
-        />
-        <StatCard
-          label="Total Expenses"
-          value={pesos(s.expenses)}
-          detail="All recorded outflows"
-          color="teal"
-          icon={<ArrowDownRight />}
-        />
-        <StatCard
-          label="Cash Balance"
-          value={pesos(s.balance)}
-          detail="Opening balance + net flow"
-          color="blue"
-          icon={<Wallet />}
-        />
-        <StatCard
-          label="Unpaid Debts"
-          value={pesos(s.unpaid)}
-          detail={`${s.debtList.filter((d) => d.remaining > 0).length} outstanding debts`}
-          color="yellow"
-          icon={<HandCoins />}
-        />
-      </div>
-      {overdue.length > 0 && (
-        <Link className="attention-banner" href="/debts">
-          <HandCoins size={20} />
-          <span>
-            {overdue.length} overdue customer balance
-            {overdue.length === 1 ? "" : "s"} to review
-          </span>
-          <ArrowRight size={18} />
-        </Link>
-      )}
-      <div className="dashboardgrid">
-        <div className="stack">
-          <section className="panel">
-            <div className="panelhead">
-              <div>
-                <h2>Cash Flow Overview</h2>
-                <p>Income and expenses over the last 6 months</p>
-              </div>
-              <span className="chip">
-                <CalendarDays size={14} /> 6 Months
-              </span>
-            </div>
-            <CashChart data={s.monthly} />
-          </section>
-          <section className="panel">
-            <div className="panelhead">
-              <div>
-                <h2>Revenue & Spending</h2>
-                <p>Monthly comparison in Philippine pesos</p>
-              </div>
-            </div>
-            <BarSummary data={s.monthly} />
-          </section>
-        </div>
-        <div className="stack">
-          <section className="panel">
-            <div className="panelhead">
-              <div>
-                <h2>Outstanding Debts</h2>
-                <p>Customer balances to collect</p>
-              </div>
-              <Link
-                href="/debts"
-                className="iconlink"
-                aria-label="View outstanding debts"
-              >
-                <ArrowRight size={18} />
+            <div className="hero-actions">
+              <Link href="/login#register" className="btn primary">
+                Start your free workspace <ArrowRight size={18} />
+              </Link>
+              <Link href="#features" className="hero-secondary">
+                Take a closer look <ArrowUpRight size={17} />
               </Link>
             </div>
-            <div className="itemlist">
-              {s.debtList
-                .filter((d) => d.remaining > 0)
-                .slice(0, 6)
-                .map((d) => (
-                  <div className="listitem" key={d.id}>
-                    <div className="personicon">
-                      {d.customer.name.slice(0, 1)}
-                    </div>
-                    <div className="grow">
-                      <strong>{d.customer.name}</strong>
-                      <small>{d.description || "Customer credit"}</small>
-                    </div>
-                    <div className="right">
-                      <strong className="moneyorange">
-                        {pesos(d.remaining)}
-                      </strong>
-                      <small>
-                        {d.dueDate ? dateLabel(d.dueDate) : "No due date"}
-                      </small>
-                    </div>
-                  </div>
-                ))}
-              {s.debtList.filter((d) => d.remaining > 0).length === 0 && (
-                <EmptyState
-                  title="All clear here"
-                  description="No outstanding customer balances. New utang records will appear here."
-                />
-              )}
+            <div className="hero-reassurance">
+              <Check size={15} /> Free plan available <span>·</span> No payment
+              details needed
             </div>
-            <Link className="subtlelink" href="/debts">
-              View all debts <ArrowRight size={15} />
-            </Link>
-          </section>
-          <section className="panel">
-            <div className="panelhead">
+          </div>
+          <div
+            className="product-preview"
+            aria-label="Illustrative dashboard with sample figures"
+          >
+            <div className="preview-top">
+              <span>
+                <Store size={16} /> Your everyday store
+              </span>
+              <span className="preview-demo">Sample data</span>
+            </div>
+            <div className="preview-heading">
+              <span className="eyebrow">A LITTLE CLARITY, EVERY DAY</span>
+              <h2>Your business at a glance.</h2>
+            </div>
+            <div className="preview-balance">
               <div>
-                <h2>Recent Activity</h2>
-                <p>Latest money movements</p>
+                <span>Cash balance</span>
+                <strong>
+                  ₱8,450<span>.00</span>
+                </strong>
+                <small>Income minus expenses in this example</small>
+              </div>
+              <Wallet size={30} />
+            </div>
+            <div className="preview-totals">
+              <div>
+                <ArrowUpRight size={18} />
+                <span>Money in</span>
+                <strong>₱12,800</strong>
+              </div>
+              <div>
+                <ArrowDownRight size={18} />
+                <span>Money out</span>
+                <strong>₱4,350</strong>
               </div>
             </div>
-            <div className="itemlist">
-              {s.transactions.length === 0 && (
-                <EmptyState
-                  title="Your story starts here"
-                  description="Once you record a transaction, you can follow your latest activity here."
-                />
-              )}
-              {s.transactions.slice(0, 6).map((t) => (
-                <div className="listitem" key={t.id}>
-                  <div
-                    className={`txicon ${t.type === "INCOME" ? "income" : "expense"}`}
-                  >
-                    {t.type === "INCOME" ? (
-                      <ArrowUpRight size={17} />
-                    ) : (
-                      <ArrowDownRight size={17} />
-                    )}
-                  </div>
-                  <div className="grow">
-                    <strong>{t.category}</strong>
-                    <small>
-                      {dateLabel(t.date)} · {t.method.replace("_", " ")}
-                    </small>
-                  </div>
-                  <strong
-                    className={
-                      t.type === "INCOME" ? "moneygreen" : "moneyorange"
-                    }
-                  >
-                    {t.type === "INCOME" ? "+" : "−"}
-                    {pesos(t.amount)}
-                  </strong>
+            <div className="preview-activity">
+              <div>
+                <span className="txicon income">
+                  <ArrowUpRight size={18} />
+                </span>
+                <div>
+                  <strong>Store sales</strong>
+                  <small>Income · Cash</small>
                 </div>
-              ))}
+                <b>+₱650</b>
+              </div>
+              <div>
+                <span className="txicon expense">
+                  <ArrowDownRight size={18} />
+                </span>
+                <div>
+                  <strong>Supplies</strong>
+                  <small>Expense · Cash</small>
+                </div>
+                <b>−₱280</b>
+              </div>
             </div>
-            <Link className="subtlelink" href="/transactions">
-              All transactions <ArrowRight size={15} />
-            </Link>
-          </section>
+            <p className="preview-caption">
+              An example of the clarity your own records can bring.
+            </p>
+          </div>
+        </section>
+        <div className="audience-strip">
+          <span>Built around your kind of business</span>
+          <strong>Sari-sari stores</strong>
+          <strong>Freelancers</strong>
+          <strong>Local services</strong>
+          <strong>Growing shops</strong>
         </div>
-      </div>
-      <p className="disclaimer">
-        Cash-flow tracking only. Unpaid credit sales are not counted as
-        collected cash; cash balance is not formal accounting profit.
-      </p>
-    </>
+        <section id="features" className="landing-features">
+          <div className="section-heading">
+            <span className="eyebrow">LESS GUESSWORK. MORE CONFIDENCE.</span>
+            <h2>
+              A better handle on
+              <br />
+              the business you’re building.
+            </h2>
+            <p>
+              Keep the essentials together, so you can spend less time piecing
+              together records and more time running your business.
+            </p>
+          </div>
+          <div className="benefit-grid">
+            <article>
+              <span className="benefit-icon">
+                <Wallet size={25} />
+              </span>
+              <h3>Follow every peso.</h3>
+              <p>
+                Record income and expenses, then see your cash balance and
+                recent activity in one workspace.
+              </p>
+              <span className="benefit-label">Income & expenses</span>
+            </article>
+            <article>
+              <span className="benefit-icon">
+                <HandCoins size={25} />
+              </span>
+              <h3>Keep customer credit clear.</h3>
+              <p>
+                Track utang, due dates and partial repayments. See what is still
+                outstanding without losing the history.
+              </p>
+              <span className="benefit-label">Utang tracking</span>
+            </article>
+            <article>
+              <span className="benefit-icon">
+                <Users size={25} />
+              </span>
+              <h3>Know your customers.</h3>
+              <p>
+                Keep contact details and outstanding balances together, with up
+                to 20 customers on Free.
+              </p>
+              <span className="benefit-label">Customer directory</span>
+            </article>
+            <article>
+              <span className="benefit-icon">
+                <ChartNoAxesCombined size={25} />
+              </span>
+              <h3>See the bigger picture.</h3>
+              <p>
+                Your dashboard brings income, expenses and customer balances
+                into focus. Saved transaction history stays accessible.
+              </p>
+              <span className="benefit-label">Business overview</span>
+            </article>
+          </div>
+        </section>
+        <section className="getting-started">
+          <div className="section-heading">
+            <span className="eyebrow">FROM SIGNUP TO YOUR FIRST ENTRY</span>
+            <h2>
+              A simple start.
+              <br />A useful daily habit.
+            </h2>
+            <Link href="/login#register" className="hero-secondary">
+              Create your workspace <ArrowRight size={17} />
+            </Link>
+          </div>
+          <ol>
+            <li>
+              <span>01</span>
+              <div>
+                <h3>Make it yours.</h3>
+                <p>
+                  Create your account and name your business. The Free plan gets
+                  you started.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <h3>Record the everyday.</h3>
+                <p>
+                  Add income, expenses and customer credit as your business day
+                  unfolds.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <h3>Come back to clarity.</h3>
+                <p>
+                  Open your dashboard to review your records, balances and
+                  outstanding payments.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </section>
+        <div className="landing-pricing">
+          <PlanCards />
+        </div>
+        <section className="landing-cta">
+          <div>
+            <span className="eyebrow">
+              YOUR BUSINESS DESERVES A CLEARER PICTURE
+            </span>
+            <h2>
+              Start with one entry.
+              <br />
+              Build from there.
+            </h2>
+            <p>Make room for a simpler way to keep track.</p>
+          </div>
+          <Link href="/login#register" className="btn">
+            Create my free account <ArrowRight size={18} />
+          </Link>
+        </section>
+      </main>
+      <footer className="public-footer">
+        <Link className="logo" href="/">
+          Peso<span>Pilot.</span>
+        </Link>
+        <p>Everyday finance for Philippine small businesses.</p>
+        <div>
+          <Link href="/#features">Features</Link>
+          <Link href="/pricing">Pricing</Link>
+          <Link href="/login">Log in</Link>
+        </div>
+        <small>
+          Cash-flow tracking, not a substitute for professional accounting or
+          tax advice.
+        </small>
+      </footer>
+    </div>
   );
 }

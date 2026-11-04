@@ -83,3 +83,5 @@ The effective plan is the highest ACTIVE, unexpired subscription attached to a b
 Plan quota writes acquire a database row lock on the owner within the same transaction as the count and write. Tests: `node --import tsx --test tests/plans.test.ts`. For database integration tests in PowerShell: `$env:PLAN_DB_TEST="1"; node --env-file=.env --import tsx --test tests/plans.test.ts`. Database tests use temporary records and clean them up afterward.
 
 Metadata: set `APP_URL` to your public HTTPS origin when deploying (Vercel production domain is used as a fallback). Pricing is indexable and included in `/sitemap.xml`. Account and workspace pages default to noindex. The branded favicon, Apple touch icon, and social preview are bundled locally.
+
+Public pages: `/` introduces PesoPilot with features, benefits, pricing and signup links. `/pricing` shows the plan comparison. Login and registration lead to `/dashboard`. Workspace pages share an authenticated route-group layout; the homepage and pricing stay public even while signed in. Payment checkout remains disabled.

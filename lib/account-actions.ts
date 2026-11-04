@@ -61,7 +61,7 @@ export async function registerAction(fd: FormData) {
   });
   if (!emailAuthEnabled()) {
     await loginUser(u.id, u.sessionVersion);
-    redirect("/");
+    redirect("/dashboard");
   }
   try {
     await issueAuthEmail(u.id, "VERIFY");
@@ -79,7 +79,7 @@ export async function loginAction(fd: FormData) {
   if (emailAuthEnabled() && !u.emailVerifiedAt)
     redirect("/verify-email?status=required");
   await loginUser(u.id, u.sessionVersion);
-  redirect("/");
+  redirect("/dashboard");
 }
 export async function logoutAction() {
   await logoutUser();
@@ -100,7 +100,7 @@ export async function switchBusiness(fd: FormData) {
     path: "/",
   });
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/dashboard");
 }
 export async function createBusiness(fd: FormData) {
   const u = await requireUser(),
@@ -128,7 +128,7 @@ export async function createBusiness(fd: FormData) {
     path: "/",
   });
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/dashboard");
 }
 export async function addStaff(fd: FormData) {
   const { business: b } = await authorizedBusiness(["OWNER", "ADMIN"]);

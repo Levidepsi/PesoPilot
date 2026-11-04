@@ -28,9 +28,9 @@ export default async function Login({
   return (
     <main className="authwrap login-wrap">
       <div className="authcard">
-        <div className="logo">
+        <Link className="logo" href="/" aria-label="PesoPilot home">
           Peso<span>Pilot.</span>
-        </div>
+        </Link>
         <span className="eyebrow">LESS GUESSWORK. MORE CLARITY.</span>
         <h1>
           Your business has a story.

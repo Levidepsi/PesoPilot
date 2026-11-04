@@ -153,6 +153,6 @@ export async function createSale(fd: FormData) {
   revalidatePath("/inventory");
   revalidatePath("/sales");
   revalidatePath("/transactions");
-  revalidatePath("/");
+  revalidatePath("/dashboard");
   redirect("/sales");
 }
