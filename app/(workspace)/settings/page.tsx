@@ -138,16 +138,16 @@ export default async function Settings({
               {Number.isFinite(access.limits.transactions)
                 ? access.limits.transactions
                 : "Unlimited"}{" "}
-              transactions this month ? {customerCount} /{" "}
+              transactions this month / {customerCount} /{" "}
               {Number.isFinite(access.limits.customers)
                 ? access.limits.customers
                 : "Unlimited"}{" "}
               customers
             </p>
             <p className="hint">
-              Status: {subscription?.status || "INACTIVE"}. Paid subscriptions
-              are not activated until you configure and verify a payment
-              provider. No fake checkout or charges are included.
+              Status: {subscription?.status || "INACTIVE"}. Contact us using the
+              WhatsApp buttons below to subscribe or renew. Paid plans are
+              activated after payment verification; renewals are manual.
             </p>
           </section>
         </div>

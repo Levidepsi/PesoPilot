@@ -32,10 +32,12 @@ export default function Pricing() {
         <h2 id="pricing-questions">Before you get started</h2>
         <h3>Can I use PesoPilot now?</h3>
         <p>Yes. Create a Free account with no payment details required.</p>
-        <h3>Why do paid plans say “Coming soon”?</h3>
+        <h3>How do I subscribe to a paid plan?</h3>
         <p>
-          Paid checkout is not available yet. You can compare prices, but you
-          cannot purchase or activate Starter or Business at this time.
+          Choose Starter or Business and message us on WhatsApp. We confirm
+          payment instructions and refund terms before you pay, then activate
+          your subscription after verifying payment. Online checkout is not yet
+          available.
         </p>
         <h3>What happens when I reach a Free limit?</h3>
         <p>
@@ -45,9 +47,9 @@ export default function Pricing() {
         </p>
         <h3>How does yearly billing work?</h3>
         <p>
-          When paid plans launch, yearly billing will be one upfront payment:
-          ₱1,428 for Starter or ₱3,828 for Business. The monthly equivalent is
-          shown for comparison.
+          Yearly subscriptions require one upfront payment: ₱1,428 for Starter
+          or ₱3,828 for Business. The monthly equivalent is shown for
+          comparison. Renewals are manual, with no automatic charges.
         </p>
       </section>
     </div>

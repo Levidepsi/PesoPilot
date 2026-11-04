@@ -111,7 +111,7 @@ export async function createBusiness(fd: FormData) {
     const access = await ownerPlan(tx, u.id);
     if (access.businessIds.length >= access.limits.businesses)
       throw new PlanLimitError(
-        `Your ${access.limits.name} plan allows ${access.limits.businesses} business(es). Paid upgrades are coming soon.`,
+        `Your ${access.limits.name} plan allows ${access.limits.businesses} business(es). Contact us through the plans section in Settings for a manual subscription.`,
       );
     return tx.business.create({
       data: {
@@ -146,7 +146,7 @@ export async function addStaff(fd: FormData) {
       throw new PlanLimitError("The owner's role cannot be changed here.");
     if (access.plan !== "BUSINESS")
       throw new PlanLimitError(
-        "Staff access requires the Business plan. Paid upgrades are coming soon.",
+        "Staff access requires the Business plan. Contact us through the plans section in Settings for a manual subscription.",
       );
     const staff = await tx.businessMember.findMany({
       where: {

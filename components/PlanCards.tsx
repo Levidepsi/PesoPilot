@@ -2,14 +2,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import { plans, type Plan } from "@/lib/plans";
+import {
+  subscriptionInquiry,
+  subscriptionWhatsApp,
+} from "@/lib/manual-subscriptions";
 export default function PlanCards({ current }: { current?: Plan }) {
   const [yearly, setYearly] = useState(false);
   return (
     <section id="plans" className="plans-section" aria-labelledby="plans-title">
       <h2 id="plans-title">Plans for your business</h2>
       <p>
-        Start with Free today. Starter and Business are not yet available for
-        purchase. No payment details are required to create a Free account.
+        Start free, or contact us on WhatsApp to arrange a Starter or Business
+        subscription. Paid plans are activated manually after payment
+        verification.
       </p>
       <div className="billing-toggle" aria-label="Billing interval">
         <button
@@ -48,7 +53,7 @@ export default function PlanCards({ current }: { current?: Plan }) {
                   ? `₱${plan.annual.toLocaleString("en-PH")} billed annually`
                   : key === "FREE"
                     ? "Free, with no payment required"
-                    : "Billed monthly"}
+                    : "Paid monthly, renewed manually"}
               </p>
               <ul>
                 {plan.features.map((feature) => (
@@ -59,19 +64,58 @@ export default function PlanCards({ current }: { current?: Plan }) {
                 <Link href="/login#register" className="btn primary">
                   Start Free
                 </Link>
+              ) : key !== "FREE" ? (
+                <a
+                  className={`btn ${key === "STARTER" ? "primary" : ""}`}
+                  href={subscriptionInquiry(key, yearly)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${current === key ? "Renew" : "Subscribe to"} ${plan.name} ${yearly ? "yearly" : "monthly"} via WhatsApp (opens in a new tab)`}
+                >
+                  {current === key
+                    ? "Renew via WhatsApp"
+                    : "Subscribe via WhatsApp"}
+                </a>
               ) : (
                 <button type="button" className="btn" disabled>
-                  {current === key
-                    ? "Current plan"
-                    : key === "FREE"
-                      ? "Free plan"
-                      : "Coming soon"}
+                  {current === key ? "Current plan" : "Free plan"}
                 </button>
               )}
             </article>
           );
         })}
       </div>
+      <aside
+        className="panel manual-subscription"
+        aria-labelledby="manual-subscription-title"
+      >
+        <h3 id="manual-subscription-title">A little help getting started</h3>
+        <p>
+          Message us on WhatsApp at <strong>{subscriptionWhatsApp}</strong>.
+          Your chosen plan and billing period will be included in an editable
+          message.
+        </p>
+        <ol>
+          <li>Create a Free account, then choose your plan above.</li>
+          <li>
+            Confirm payment instructions and refund terms with us before paying.
+          </li>
+          <li>
+            Share your payment reference in chat. Once verified, we activate
+            your plan and confirm its expiry.
+          </li>
+        </ol>
+        <p>
+          Office hours: Monday–Friday, 7 AM–9 PM Philippine time. Requests
+          during office hours are handled within the day; requests outside these
+          hours are handled the next working day. Activation follows payment
+          verification.
+        </p>
+        <p className="hint">
+          Opening WhatsApp does not send a message or activate a subscription.
+          Renewals are manual; you will not be charged automatically.
+        </p>
+      </aside>
       <p className="hint">
         Each income entry, expense entry, recorded sale, or utang repayment
         counts as one transaction. Creating an unpaid utang record does not

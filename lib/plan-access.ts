@@ -48,7 +48,7 @@ export async function checkWrite(
   const access = await ownerPlan(tx, context.ownerId);
   if ((kind === "inventory" || kind === "sale") && access.plan === "FREE")
     throw new PlanLimitError(
-      "Inventory and sales entry require Starter or Business. Paid plans are coming soon; your saved records remain available.",
+      "Inventory and sales entry require Starter or Business. Contact us through Settings to subscribe manually. Your saved records remain available.",
     );
   if (kind === "transaction" && access.plan === "FREE") {
     const count = await tx.transaction.count({

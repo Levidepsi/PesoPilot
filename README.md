@@ -72,7 +72,7 @@ Temporary local bypass: set `EMAIL_AUTH_ENABLED="false"` in `.env` and restart t
 
 ## Plans (payments not connected)
 
-Settings includes monthly/yearly pricing: Free, Starter (PHP 149/month or PHP 1,428/year), and Business (PHP 399/month or PHP 3,828/year). Paid buttons are disabled and no checkout, PayMongo keys, or payment requests are included.
+Settings includes monthly/yearly pricing: Free, Starter (PHP 149/month or PHP 1,428/year), and Business (PHP 399/month or PHP 3,828/year). Paid plan buttons open a prefilled WhatsApp inquiry to the public contact configured in `lib/manual-subscriptions.ts`. Monthly/yearly amounts follow the selected interval. No automatic payment collection or activation occurs. Verify the payment in your merchant account before manually updating the correct Subscription row: plan STARTER/BUSINESS, status ACTIVE, provider MANUAL, providerReference for the verified payment, and currentPeriodEnd for its expiry. Renewals are manual. Refund terms are confirmed in chat before payment.
 
 Free allows one owned business, 100 transactions per Philippine calendar month, and 20 customers per business. Income entries, expense entries, product sales, and utang repayments each create one counted transaction; unpaid debt records do not. Quotas use the record creation timestamp, not a user-selected transaction date. All saved transaction history remains accessible. Reaching a limit blocks new entries, not reading existing records.
 
@@ -84,4 +84,4 @@ Plan quota writes acquire a database row lock on the owner within the same trans
 
 Metadata: set `APP_URL` to your public HTTPS origin when deploying (Vercel production domain is used as a fallback). Pricing is indexable and included in `/sitemap.xml`. Account and workspace pages default to noindex. The branded favicon, Apple touch icon, and social preview are bundled locally.
 
-Public pages: `/` introduces PesoPilot with features, benefits, pricing and signup links. `/pricing` shows the plan comparison. Login and registration lead to `/dashboard`. Workspace pages share an authenticated route-group layout; the homepage and pricing stay public even while signed in. Payment checkout remains disabled.
+Public pages: `/` introduces PesoPilot with features, benefits, pricing and signup links. `/pricing` shows the plan comparison. Login and registration lead to `/dashboard`. Workspace pages share an authenticated route-group layout; the homepage and pricing stay public even while signed in. Online payment checkout remains disabled; paid subscriptions can be arranged manually through WhatsApp.
