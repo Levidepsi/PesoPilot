@@ -30,6 +30,11 @@
   font-size: 13px;
   font-weight: 600;
 }
+.public-user-name {
+  max-width: 240px;
+  overflow-wrap: anywhere;
+  color: #365444;
+}
 .public-nav-links > a:not(.btn):hover {
   color: #b64a22;
 }
