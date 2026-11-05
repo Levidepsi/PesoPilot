@@ -1,3 +1,6 @@
+import { isSiteAdmin } from "@/lib/admin";
+import { requireUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { pageMetadata } from "@/lib/site-metadata";
 import EmptyState from "@/components/EmptyState";
 import Link from "next/link";
@@ -24,6 +27,7 @@ export const metadata = pageMetadata(
 );
 
 export default async function Dashboard() {
+  if (isSiteAdmin(await requireUser())) redirect("/admin");
   const s = await summary();
   const [access, transactionCount, customerCount] = await Promise.all([
     businessPlan(db, s.b.id),
@@ -54,7 +58,7 @@ export default async function Dashboard() {
         <span>
           <span className="live-dot" /> {s.b.name}
         </span>
-        <span>All-time totals · Philippine peso</span>
+        <span>All-time totals Â· Philippine peso</span>
       </div>
       <section className="panel" aria-labelledby="dashboard-usage-title">
         <div className="panelhead">
@@ -71,7 +75,7 @@ export default async function Dashboard() {
               : "Unlimited"}
           </strong>{" "}
           transactions this month
-          {" · "}
+          {" Â· "}
           <strong>
             {customerCount} /{" "}
             {Number.isFinite(access.limits.customers)
@@ -88,7 +92,7 @@ export default async function Dashboard() {
       {s.transactions.length === 0 && (
         <section className="welcome-banner">
           <div>
-            <span className="eyebrow">LET’S GET YOU STARTED</span>
+            <span className="eyebrow">LETâ€™S GET YOU STARTED</span>
             <h2>Your next chapter starts with one entry.</h2>
             <p>
               Add your first income or expense to bring your dashboard to life.
@@ -182,7 +186,8 @@ export default async function Dashboard() {
         </div>
         <div className="stack">
           <section className="panel">
-            <div className="panelhead">Debt
+            <div className="panelhead">
+              Debt
               <div>
                 <h2>Outstanding Debts</h2>
                 <p>Customer balances to collect</p>
@@ -257,7 +262,7 @@ export default async function Dashboard() {
                   <div className="grow">
                     <strong>{t.category}</strong>
                     <small>
-                      {dateLabel(t.date)} · {t.method.replace("_", " ")}
+                      {dateLabel(t.date)} Â· {t.method.replace("_", " ")}
                     </small>
                   </div>
                   <strong
@@ -265,7 +270,7 @@ export default async function Dashboard() {
                       t.type === "INCOME" ? "moneygreen" : "moneyorange"
                     }
                   >
-                    {t.type === "INCOME" ? "+" : "−"}
+                    {t.type === "INCOME" ? "+" : "âˆ’"}
                     {pesos(t.amount)}
                   </strong>
                 </div>

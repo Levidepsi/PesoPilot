@@ -49,39 +49,43 @@ export default function WorkspaceNav({
         aria-label="Workspace"
         className={open ? "nav-open" : ""}
       >
-        {[
-          ...items,
-          ...(isAdmin
-            ? [
-                {
-                  href: "/admin",
-                  label: "Subscriptions admin",
-                  icon: Settings2,
-                },
-              ]
-            : []),
-        ].map(({ href, label, icon: Icon }) => (
+        {(isAdmin
+          ? [
+              {
+                href: "/admin",
+                label: "Admin ? Customer overview",
+                icon: Users,
+              },
+            ]
+          : items
+        ).map(({ href, label, icon: Icon }) => (
           <Link
             key={href}
             href={href}
-            aria-current={pathname === href ? "page" : undefined}
+            aria-current={
+              pathname === href || pathname.startsWith(`${href}/`)
+                ? "page"
+                : undefined
+            }
             onClick={() => setOpen(false)}
           >
             <Icon size={19} />
             <span>{label}</span>
-            {pathname === href && (
+            {(pathname === href || pathname.startsWith(`${href}/`)) && (
               <span className="nav-dot" aria-hidden="true" />
             )}
           </Link>
         ))}
-        <Link
-          href="/pricing"
-          onClick={() => setOpen(false)}
-          aria-current={pathname === "/pricing" ? "page" : undefined}
-        >
-          <ArrowUpRight size={19} />
-          <span>Explore plans</span>
-        </Link>
+        {!isAdmin && (
+          <Link
+            href="/pricing"
+            onClick={() => setOpen(false)}
+            aria-current={pathname === "/pricing" ? "page" : undefined}
+          >
+            <ArrowUpRight size={19} />
+            <span>Explore plans</span>
+          </Link>
+        )}
       </nav>
     </div>
   );

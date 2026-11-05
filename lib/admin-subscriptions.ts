@@ -8,7 +8,8 @@ import { Prisma } from "@prisma/client";
 
 export async function updateSubscription(fd: FormData) {
   const actor = await requireSiteAdmin();
-  let businessId = "";
+  let businessId = String(fd.get("businessId") ?? "");
+  const q = encodeURIComponent(String(fd.get("q") ?? "").slice(0, 100));
   try {
     const input = parseSubscriptionChange(fd);
     businessId = input.businessId;
@@ -80,9 +81,9 @@ export async function updateSubscription(fd: FormData) {
           ? error.message
           : "Could not save.";
     redirect(
-      `/admin?businessId=${encodeURIComponent(businessId)}&error=${encodeURIComponent(message)}`,
+      `/admin/${encodeURIComponent(businessId)}?q=${q}&error=${encodeURIComponent(message)}`,
     );
   }
   revalidatePath("/", "layout");
-  redirect(`/admin?businessId=${encodeURIComponent(businessId)}&saved=1`);
+  redirect(`/admin/${encodeURIComponent(businessId)}?q=${q}&saved=1`);
 }

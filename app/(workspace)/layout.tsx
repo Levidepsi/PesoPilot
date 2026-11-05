@@ -11,6 +11,7 @@ export default async function WorkspaceLayout({
   children: React.ReactNode;
 }) {
   const u = await requireUser();
+  const admin = isSiteAdmin(u);
   const memberships = await db.businessMember.findMany({
     where: { userId: u.id },
     include: { business: true },
@@ -20,14 +21,14 @@ export default async function WorkspaceLayout({
     <>
       <div className="shell">
         <aside className="sidebar">
-          <Link className="logo" href="/dashboard">
+          <Link className="logo" href={admin ? "/admin" : "/dashboard"}>
             Peso<span>Pilot.</span>
           </Link>
           <div className="workspace">
             <Store size={17} />
-            <span>{b.name}</span>
+            <span>{admin ? "Administration" : b.name}</span>
           </div>
-          <div className="navlabel">WORKSPACE</div>
+          <div className="navlabel">{admin ? "ADMIN" : "WORKSPACE"}</div>
           <WorkspaceNav isAdmin={isSiteAdmin(u)} />
           <form action={logoutAction} className="logoutform">
             <button className="btn">
@@ -44,11 +45,13 @@ export default async function WorkspaceLayout({
         <main className="main" id="main-content">
           <header className="topbar">
             <div>
-              <div className="crumb">YOUR WORKSPACE</div>
-              <strong>{b.name}</strong>
+              <div className="crumb">
+                {admin ? "SITE ADMIN" : "YOUR WORKSPACE"}
+              </div>
+              <strong>{admin ? "Administration" : b.name}</strong>
             </div>
             <div className="topright">
-              {memberships.length > 1 && (
+              {!admin && memberships.length > 1 && (
                 <form action={switchBusiness}>
                   <select
                     name="businessId"
