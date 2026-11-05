@@ -90,7 +90,7 @@ export async function payDebt(fd: FormData) {
   if (!["CASH", "GCASH", "MAYA", "BANK_TRANSFER", "OTHER"].includes(method))
     throw new Error("Invalid method");
   // Lock the owner before checking the quota and outstanding balance.
-  await planMutation(async (tx) => {
+  const customerId = await planMutation(async (tx) => {
     await checkWrite(tx, b.id, "transaction");
     const debt = await tx.debt.findFirst({
       where: { id: debtId, businessId: b.id },
@@ -114,8 +114,12 @@ export async function payDebt(fd: FormData) {
     await tx.debtPayment.create({
       data: { debtId, transactionId: transaction.id, amount },
     });
+    return debt.customerId;
   });
   refresh();
+  revalidatePath(`/customers/${customerId}`);
+  if (val(fd, "returnTo") === "customer")
+    redirect(`/customers/${customerId}?saved=1`);
   redirect("/debts");
 }
 export async function renameBusiness(fd: FormData) {

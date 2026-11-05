@@ -1,3 +1,4 @@
+import SubmitButton from "@/components/SubmitButton";
 import { pageMetadata } from "@/lib/site-metadata";
 import { businessPlan } from "@/lib/plan-access";
 import Link from "next/link";
@@ -45,8 +46,7 @@ export default async function Sales() {
         <section className="panel">
           <h2>New Sale</h2>
           <p className="hint">
-            Single-product checkout for MVP. More advanced cart checkout can be
-            added later.
+            Choose a product, enter the quantity, and record the payment.
           </p>
           <form action={createSale} className="form">
             <fieldset className="plan-fieldset" disabled={!canWrite}>
@@ -65,6 +65,7 @@ export default async function Sales() {
                 <input
                   name="quantity"
                   type="number"
+                  inputMode="decimal"
                   min="1"
                   step="1"
                   defaultValue="1"
@@ -81,9 +82,12 @@ export default async function Sales() {
                   <option>OTHER</option>
                 </select>
               </label>
-              <button className="btn primary" disabled={!products.length}>
+              <SubmitButton
+                pendingLabel="Recording sale?"
+                disabled={!products.length}
+              >
                 Complete Sale
-              </button>
+              </SubmitButton>
             </fieldset>
           </form>
         </section>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pageMetadata } from "@/lib/site-metadata";
 import EmptyState from "@/components/EmptyState";
 import SubmitButton from "@/components/SubmitButton";
@@ -40,7 +41,13 @@ export default async function Customers() {
             </label>
             <label>
               Phone number
-              <input name="phone" maxLength={30} placeholder="09xxxxxxxxx" />
+              <input
+                type="tel"
+                autoComplete="tel"
+                name="phone"
+                maxLength={30}
+                placeholder="09xxxxxxxxx"
+              />
             </label>
             <label>
               Notes
@@ -69,7 +76,11 @@ export default async function Customers() {
                 0,
               );
               return (
-                <div className="listitem" key={c.id}>
+                <Link
+                  href={`/customers/${c.id}`}
+                  className="listitem customer-link"
+                  key={c.id}
+                >
                   <div className="personicon">{c.name.slice(0, 1)}</div>
                   <div className="grow">
                     <strong>{c.name}</strong>
@@ -82,8 +93,9 @@ export default async function Customers() {
                       {pesos(unpaid)}
                     </strong>
                     <small>Unpaid balance</small>
+                    <small className="customer-view">View customer ?</small>
                   </div>
-                </div>
+                </Link>
               );
             })}
             {rows.length === 0 && (

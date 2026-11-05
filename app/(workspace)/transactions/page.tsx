@@ -42,6 +42,7 @@ export default async function Transactions() {
               <input
                 name="amount"
                 type="number"
+                inputMode="decimal"
                 min="0.01"
                 step="0.01"
                 placeholder="e.g. 250.00"

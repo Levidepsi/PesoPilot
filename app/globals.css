@@ -2169,3 +2169,137 @@ textarea {
     animation: none;
   }
 }
+
+/* Customer balances and comfortable mobile entry. */
+.customer-balances {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.customer-balances strong {
+  font-size: clamp(22px, 3vw, 32px);
+  overflow-wrap: anywhere;
+}
+.customer-link {
+  border-radius: 12px;
+  padding-inline: 10px;
+}
+.customer-link:hover {
+  background: #f2f6ed;
+}
+.customer-view {
+  color: #396b49 !important;
+  margin-top: 6px;
+}
+.customer-note {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.payment-success {
+  background: #eaf3e8;
+  border: 1px solid #b6d2ad;
+  padding: 16px;
+  border-radius: 12px;
+  color: #245438;
+}
+.main,
+.panel,
+.twocol > *,
+.grow {
+  min-width: 0;
+}
+.pagehead h1,
+.debtrow,
+.topbar strong {
+  overflow-wrap: anywhere;
+}
+.payform {
+  grid-template-columns: minmax(0, 1fr) 105px auto;
+}
+.payform input,
+.payform select {
+  min-width: 0;
+  width: 100%;
+}
+@media (min-width: 781px) and (max-width: 1050px) {
+  .twocol {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 780px) {
+  .page input:not([type="checkbox"]):not([type="radio"]),
+  .page select,
+  .page textarea {
+    font-size: 16px;
+    min-height: 48px;
+    max-width: 100%;
+  }
+  .page .btn,
+  .sidebar .logoutform .btn,
+  .mobile-menu {
+    min-height: 44px;
+  }
+  .form > .btn,
+  .plan-fieldset > .btn {
+    width: 100%;
+  }
+  .customer-balances {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .customer-balances .panel {
+    padding: 16px;
+  }
+  .customer-balances h2 {
+    margin-bottom: 8px;
+  }
+  .customer-balances .hint {
+    margin-bottom: 0;
+  }
+  .listitem {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .listitem .grow {
+    flex: 1;
+    min-width: 120px;
+  }
+  .listitem > .right,
+  .listitem > strong:last-child {
+    margin-left: auto;
+  }
+  .debtrow {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .debtrow > :first-child {
+    min-width: 0;
+  }
+  .payform {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .payform button {
+    grid-column: 1 / -1;
+  }
+  .sidebar nav a {
+    white-space: normal;
+  }
+  .topright,
+  .topright form {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 380px) {
+  .payform {
+    grid-template-columns: 1fr;
+  }
+  .page .panel {
+    padding: 16px;
+  }
+  .customer-link .right {
+    flex-basis: 100%;
+    text-align: left;
+    padding-left: 0;
+  }
+}

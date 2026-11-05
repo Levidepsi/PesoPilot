@@ -4,10 +4,12 @@ import { LoaderCircle } from "lucide-react";
 import type { ReactNode } from "react";
 export default function SubmitButton({
   children,
+  disabled = false,
   pendingLabel = "Saving…",
   className = "btn primary",
 }: {
   children: ReactNode;
+  disabled?: boolean;
   pendingLabel?: string;
   className?: string;
 }) {
@@ -16,7 +18,7 @@ export default function SubmitButton({
     <button
       type="submit"
       className={className}
-      disabled={pending}
+      disabled={pending || disabled}
       aria-busy={pending}
     >
       {pending && (

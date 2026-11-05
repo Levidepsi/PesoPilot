@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pageMetadata } from "@/lib/site-metadata";
 import SubmitButton from "@/components/SubmitButton";
 import { db, business } from "@/lib/db";
@@ -50,6 +51,7 @@ export default async function Debts() {
               <input
                 name="amount"
                 type="number"
+                inputMode="decimal"
                 step="0.01"
                 min="0.01"
                 required
@@ -93,7 +95,12 @@ export default async function Debts() {
                 <div className="debtcard" key={d.id}>
                   <div className="debtrow">
                     <div>
-                      <strong>{d.customer.name}</strong>
+                      <Link
+                        className="subtlelink"
+                        href={`/customers/${d.customerId}`}
+                      >
+                        <strong>{d.customer.name}</strong>
+                      </Link>
                       <small>
                         {d.description || "Customer credit"} ·{" "}
                         {d.dueDate
@@ -127,6 +134,7 @@ export default async function Debts() {
                         aria-label="Payment amount"
                         name="amount"
                         type="number"
+                        inputMode="decimal"
                         step="0.01"
                         min="0.01"
                         max={(left / 100).toFixed(2)}

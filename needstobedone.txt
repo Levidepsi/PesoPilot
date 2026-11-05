@@ -40,3 +40,8 @@ We’d restrict access to your designated admin account and enforce permissions 
 For your manual WhatsApp flow: verify payment → open admin page → select plan and expiry → activate.
 
 We can build this later.
+
+Protection against mistakes — Confirm deletions, prevent duplicate submissions, and make successful saves obvious.
+Password recovery — Verify that reset emails actually arrive and the full reset flow works.
+Useful overview — Highlight today’s sales, this month’s expenses, overdue debts, and low-stock items, with links to act on each.
+Admin customer overview — Add account and plan totals, subscription status filters, and upcoming expirations so you can find customers needing attention.
